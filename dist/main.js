@@ -378,7 +378,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  gap: 10vw;
+  gap: 5vw;
   font-size: 20px;
 }
 
@@ -429,13 +429,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   font-size: 30px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 600px) {
   body {
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    justify-content: flex-start;
   }
+  
+  
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,8BAA8B;EAC9B,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,eAAe;AACjB;;AAEA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,uCAAuC;EACvC,oCAAoC;EACpC,uBAAuB;AACzB;;AAEA;EACE,8BAA8B;EAC9B,uBAAuB;EACvB,eAAe;AACjB;;;AAGA;EACE,8BAA8B;;AAEhC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,8BAA8B;AAChC;;AAEA;EACE,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,sBAAsB;IACtB,SAAS;EACX;AACF","sourcesContent":["body {\n  background: rgb(240, 235, 235);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  gap: 10vw;\n  font-size: 20px;\n}\n\n.container {\n  padding: 40px;\n}\n.board {\n  display: grid;\n  grid-template-columns: repeat(10, 40px);\n  grid-template-rows: repeat(10, 40px);\n  border: 5px solid black;\n}\n\n.cell {\n  background: rgb(156, 184, 197);\n  border: 1px solid black;\n  cursor: pointer;\n}\n\n\n[class=\"cell\"]:hover {\n  background: rgb(142, 170, 184);\n\n}\n\n.ship {\n  background: rgb(3, 1, 24);\n}\n\n.hit {\n  background: red;\n}\n\n.hit:hover {\n  background: darkred;\n}\n\n.miss {\n  background: white;\n}\n\n.miss:hover {\n  background: rgb(240, 237, 237);\n}\n\n.win {\n  color: green;\n  font-size: 30px;\n}\n\n@media only screen and (max-width: 1000px) {\n  body {\n    flex-direction: column;\n    gap: 20px;\n  }\n}\n"],"sourceRoot":""}]);
+
+@media only screen and (max-width: 1000px) {
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(10, 25px);
+    grid-template-rows: repeat(10, 25px);
+    border: 5px solid black;
+  }
+  
+  
+}
+
+
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,8BAA8B;EAC9B,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,QAAQ;EACR,eAAe;AACjB;;AAEA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,uCAAuC;EACvC,oCAAoC;EACpC,uBAAuB;AACzB;;AAEA;EACE,8BAA8B;EAC9B,uBAAuB;EACvB,eAAe;AACjB;;;AAGA;EACE,8BAA8B;;AAEhC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,8BAA8B;AAChC;;AAEA;EACE,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,sBAAsB;IACtB,SAAS;IACT,2BAA2B;EAC7B;;;AAGF;;AAEA;;EAEE;IACE,aAAa;IACb,uCAAuC;IACvC,oCAAoC;IACpC,uBAAuB;EACzB;;;AAGF","sourcesContent":["body {\n  background: rgb(240, 235, 235);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  gap: 5vw;\n  font-size: 20px;\n}\n\n.container {\n  padding: 40px;\n}\n.board {\n  display: grid;\n  grid-template-columns: repeat(10, 40px);\n  grid-template-rows: repeat(10, 40px);\n  border: 5px solid black;\n}\n\n.cell {\n  background: rgb(156, 184, 197);\n  border: 1px solid black;\n  cursor: pointer;\n}\n\n\n[class=\"cell\"]:hover {\n  background: rgb(142, 170, 184);\n\n}\n\n.ship {\n  background: rgb(3, 1, 24);\n}\n\n.hit {\n  background: red;\n}\n\n.hit:hover {\n  background: darkred;\n}\n\n.miss {\n  background: white;\n}\n\n.miss:hover {\n  background: rgb(240, 237, 237);\n}\n\n.win {\n  color: green;\n  font-size: 30px;\n}\n\n@media only screen and (max-width: 600px) {\n  body {\n    flex-direction: column;\n    gap: 10px;\n    justify-content: flex-start;\n  }\n  \n  \n}\n\n@media only screen and (max-width: 1000px) {\n\n  .board {\n    display: grid;\n    grid-template-columns: repeat(10, 25px);\n    grid-template-rows: repeat(10, 25px);\n    border: 5px solid black;\n  }\n  \n  \n}\n\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
