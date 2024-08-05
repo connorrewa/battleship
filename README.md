@@ -1,5 +1,6 @@
 # battleship
 
+A battleship game made from principles of Test Driven Development (TDD) with jest.
 <h3>Opening State:</h3>
 
 ![Alt text](src/images/start_state.png?raw=true )
