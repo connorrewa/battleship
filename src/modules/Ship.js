@@ -18,8 +18,13 @@ export default Ship = (newLength) => {
         return false;
     }
 
+    const getLength = () => {
+        return length;
+    }
+
     return {
         hit,
-        isSunk
+        isSunk,
+        getLength
     }
 }
