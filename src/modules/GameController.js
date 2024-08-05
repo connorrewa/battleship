@@ -43,9 +43,8 @@ const GameController = (humanBoard, computerBoard) => {
         } else {
           e.target.classList.add("miss");
         }
-        console.log(computer.getBoard().allShipsSunk());
         if (computer.getBoard().allShipsSunk()) {
-          h2 = document.querySelector(".player-text");
+          let h2 = document.querySelector(".computer-text");
           console.log(h2);
           h2.classList.add('win');
           h2.textContent = "Player Wins!!";
@@ -68,10 +67,8 @@ const GameController = (humanBoard, computerBoard) => {
     } else {
       cell.classList.add("miss");
     }
-
     if (human.getBoard().allShipsSunk()) {
-      h2 = document.querySelector(".computer-text");
-      console.log(h2);
+      let h2 = document.querySelector(".player-text");
       h2.classList.add('win');
       h2.textContent = "Computer Wins!!";
       return;

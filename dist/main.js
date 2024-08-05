@@ -50,9 +50,8 @@ const GameController = (humanBoard, computerBoard) => {
       } else {
         e.target.classList.add("miss");
       }
-      console.log(computer.getBoard().allShipsSunk());
       if (computer.getBoard().allShipsSunk()) {
-        h2 = document.querySelector(".player-text");
+        let h2 = document.querySelector(".computer-text");
         console.log(h2);
         h2.classList.add('win');
         h2.textContent = "Player Wins!!";
@@ -77,8 +76,7 @@ const GameController = (humanBoard, computerBoard) => {
       cell.classList.add("miss");
     }
     if (human.getBoard().allShipsSunk()) {
-      h2 = document.querySelector(".computer-text");
-      console.log(h2);
+      let h2 = document.querySelector(".player-text");
       h2.classList.add('win');
       h2.textContent = "Computer Wins!!";
       return;
@@ -136,7 +134,7 @@ const GameBoard = () => {
         }
       }
     }
-    if (orientation === 'x') {
+    if (orientation === "x") {
       if (x + ship.getLength() > size - 1) return false;
       for (let i = 0; i < ship.getLength(); i++) {
         if (ships.some(_ref => {
@@ -152,7 +150,7 @@ const GameBoard = () => {
         }
       }
       return true;
-    } else if (orientation === 'y') {
+    } else if (orientation === "y") {
       if (y + ship.getLength() > size - 1) {
         return false;
       }
@@ -180,19 +178,18 @@ const GameBoard = () => {
     })) {
       return false;
     }
-    ;
     return true;
   };
   const placeShips = (ship, x, y, orientation) => {
     if (!isValidPlacement(ship, x, y, orientation)) {
-      throw new Error('Invalid placement');
+      throw new Error("Invalid placement");
     }
     const coordinates = [];
-    if (orientation === 'x') {
+    if (orientation === "x") {
       for (let i = 0; i < ship.getLength(); i++) {
         coordinates.push([x + i, y]);
       }
-    } else if (orientation === 'y') {
+    } else if (orientation === "y") {
       for (let i = 0; i < ship.getLength(); i++) {
         coordinates.push([x, y + i]);
       }
@@ -210,7 +207,6 @@ const GameBoard = () => {
     })) {
       return false;
     }
-    ;
     shotsTaken.push([x, y]);
     for (let {
       ship,
@@ -234,7 +230,7 @@ const GameBoard = () => {
       while (!placed) {
         let randomX = Math.floor(Math.random() * 10);
         let randomY = Math.floor(Math.random() * 10);
-        let randomOrientation = Math.random() < 0.5 ? 'x' : 'y';
+        let randomOrientation = Math.random() < 0.5 ? "x" : "y";
         if (isValidPlacement(ship, randomX, randomY, randomOrientation)) {
           placeShips(ship, randomX, randomY, randomOrientation);
           placed = true;
@@ -246,8 +242,8 @@ const GameBoard = () => {
     let showShips = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
         cell.dataset.x = x;
         cell.dataset.y = y;
         if (showShips && ships.some(_ref7 => {
@@ -259,7 +255,7 @@ const GameBoard = () => {
             return cx === x && cy === y;
           });
         })) {
-          cell.classList.add('ship');
+          cell.classList.add("ship");
         }
         boardElement.appendChild(cell);
       }
@@ -371,6 +367,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   padding: 0;
   box-sizing: border-box;
   gap: 10vw;
+  font-size: 20px;
 }
 
 .container {
@@ -408,7 +405,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 
 .win {
   color: green;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -417,7 +414,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
     gap: 20px;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,8BAA8B;EAC9B,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;AACX;;AAEA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,uCAAuC;EACvC,oCAAoC;EACpC,uBAAuB;AACzB;;AAEA;EACE,8BAA8B;EAC9B,uBAAuB;AACzB;;;AAGA;EACE,8BAA8B;;AAEhC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,sBAAsB;IACtB,SAAS;EACX;AACF","sourcesContent":["body {\n  background: rgb(240, 235, 235);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  gap: 10vw;\n}\n\n.container {\n  padding: 40px;\n}\n.board {\n  display: grid;\n  grid-template-columns: repeat(10, 40px);\n  grid-template-rows: repeat(10, 40px);\n  border: 5px solid black;\n}\n\n.cell {\n  background: rgb(156, 184, 197);\n  border: 1px solid black;\n}\n\n\n[class=\"cell\"]:hover {\n  background: rgb(142, 170, 184);\n\n}\n\n.ship {\n  background: rgb(3, 1, 24);\n}\n\n.hit {\n  background: red;\n}\n\n.miss {\n  background: white;\n}\n\n.win {\n  color: green;\n  font-size: 20px;\n}\n\n@media only screen and (max-width: 1000px) {\n  body {\n    flex-direction: column;\n    gap: 20px;\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,8BAA8B;EAC9B,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,eAAe;AACjB;;AAEA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,uCAAuC;EACvC,oCAAoC;EACpC,uBAAuB;AACzB;;AAEA;EACE,8BAA8B;EAC9B,uBAAuB;AACzB;;;AAGA;EACE,8BAA8B;;AAEhC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,sBAAsB;IACtB,SAAS;EACX;AACF","sourcesContent":["body {\n  background: rgb(240, 235, 235);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  gap: 10vw;\n  font-size: 20px;\n}\n\n.container {\n  padding: 40px;\n}\n.board {\n  display: grid;\n  grid-template-columns: repeat(10, 40px);\n  grid-template-rows: repeat(10, 40px);\n  border: 5px solid black;\n}\n\n.cell {\n  background: rgb(156, 184, 197);\n  border: 1px solid black;\n}\n\n\n[class=\"cell\"]:hover {\n  background: rgb(142, 170, 184);\n\n}\n\n.ship {\n  background: rgb(3, 1, 24);\n}\n\n.hit {\n  background: red;\n}\n\n.miss {\n  background: white;\n}\n\n.win {\n  color: green;\n  font-size: 30px;\n}\n\n@media only screen and (max-width: 1000px) {\n  body {\n    flex-direction: column;\n    gap: 20px;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
