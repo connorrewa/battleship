@@ -1,6 +1,6 @@
-import { Ship } from "./Ship"
+import Ship from "./Ship";
 
-export default GameBoard = () => {
+const GameBoard = () => {
     let size = 10;
     let ships = [];
     let shotsTaken = [];
@@ -48,6 +48,18 @@ export default GameBoard = () => {
         return false;
     }
 
+    const isValidAttack = (x,y) => {
+        
+        if (shotsTaken.some( ([sx, sy]) => {
+            return sx === x && sy === y
+        })) {
+
+            return false;
+        };
+
+        return true;
+    }
+
     const placeShips = (ship, x, y, orientation) => {
         if (!isValidPlacement(ship, x, y, orientation)) {
             throw new Error('Invalid placement');
@@ -71,8 +83,8 @@ export default GameBoard = () => {
         return coordinates;
     }
 
+
     const receiveAttack = (x, y) => {
-        // did attack hit a ship?
         if (shotsTaken.some( ([sx, sy]) => sx === x && sy === y)) {
             return false;
         };
@@ -112,7 +124,18 @@ export default GameBoard = () => {
     }
 
     const render = (boardElement, showShips = false) => {
-        
+        for (let y = 0; y < size; y++) {
+            for (let x = 0; x < size; x++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.x = x;
+                cell.dataset.y = y;
+                if (showShips && ships.some( ({ coordinates }) => coordinates.some( ([cx, cy]) => cx === x && cy === y))) {
+                    cell.classList.add('ship');
+                }
+                boardElement.appendChild(cell);
+            }
+        }
     }
 
     return {
@@ -121,7 +144,11 @@ export default GameBoard = () => {
         receiveAttack,
         allShipsSunk,
         populateBoard,
-        render
+        render,
+        isValidAttack,
+
     }
 
 }
+
+export default GameBoard;

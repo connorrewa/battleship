@@ -1,4 +1,4 @@
-import Gameboard from "../src/modules/Gameboard";
+import GameBoard from "../src/modules/Gameboard";
 import Ship from "../src/modules/Ship";
 
 test ('isValidPlacement', () => {
@@ -14,7 +14,7 @@ test ('isValidPlacement', () => {
 test ('placeShips', () => {
     let ship2 = Ship(2);
     let ship3 = Ship(3);
-    let gameboard = Gameboard();
+    let gameboard = GameBoard();
 
     expect(gameboard.placeShips(ship2, 0, 0, 'y')).toEqual([[0,0], [0,1]]);
     expect(gameboard.placeShips(ship3, 1, 1, 'x')).toEqual([[1,1], [2,1], [3,1]]);
@@ -31,7 +31,7 @@ test('receive attack', () => {
 })
 
 test('all ships sunk', () => {
-    let gameboard = Gameboard();
+    let gameboard = GameBoard();
     let ship2 = Ship(2);
     let ship3 = Ship(3);
 

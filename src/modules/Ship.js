@@ -1,4 +1,4 @@
-export default Ship = (newLength) => {
+const Ship = (newLength) => {
     let length = newLength;
     let hitCount = 0;
     let sunk = false;
@@ -28,3 +28,5 @@ export default Ship = (newLength) => {
         getLength
     }
 }
+
+export default Ship;

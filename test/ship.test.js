@@ -1,4 +1,4 @@
-import ship from '../src/modules/Ship';
+import Ship from '../src/modules/Ship';
 
 test('ship instantiates', () => {
     let ship = Ship(3);

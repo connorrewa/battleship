@@ -1,7 +1,15 @@
 import GameBoard from './Gameboard'
 
-export default Player = () => {
+const Player = () => {
     let gameboard = GameBoard();
 
-    return {gameboard}
+    const getBoard = () => {
+        return gameboard;
+    }
+
+    return {
+        getBoard
+    };
 }
+
+export default Player;
