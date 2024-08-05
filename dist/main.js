@@ -33,7 +33,7 @@ const GameController = (humanBoard, computerBoard) => {
     const humanBoardElement = document.querySelector(".human");
     const computerBoardElement = document.querySelector(".computer");
     human.getBoard().render(humanBoardElement, true);
-    computer.getBoard().render(computerBoardElement, true);
+    computer.getBoard().render(computerBoardElement, false);
   };
   const humanTurn = () => {
     const computerBoardElement = document.querySelector(".computer");
