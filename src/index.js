@@ -8,3 +8,9 @@ function returnHi () {
 module.exports = {
     returnHi
 }
+
+const human = Player();
+const computer = Player();
+const gameController = GameController();
+
+gameController.startGame();
