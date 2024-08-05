@@ -31,7 +31,6 @@ const GameController = (humanBoard, computerBoard) => {
     computerBoardElement.addEventListener(
       "click",
       (e) => {
-        console.log("click");
         const x = parseInt(e.target.dataset.x);
         const y = parseInt(e.target.dataset.y);
         if (!computer.getBoard().isValidAttack(x, y)) {
@@ -43,11 +42,7 @@ const GameController = (humanBoard, computerBoard) => {
         } else {
           e.target.classList.add("miss");
         }
-        if (computer.getBoard().allShipsSunk()) {
-          let h2 = document.querySelector(".computer-text");
-          console.log(h2);
-          h2.classList.add('win');
-          h2.textContent = "Player Wins!!";
+        if (checkHumanWin()) {
           return;
         }
 
@@ -56,6 +51,15 @@ const GameController = (humanBoard, computerBoard) => {
       },
       { once: true }
     );
+  };
+
+  const checkHumanWin = () => {
+    if (computer.getBoard().allShipsSunk()) {
+      let h2 = document.querySelector(".computer-text");
+      h2.classList.add("win");
+      h2.textContent = "Player Wins!!";
+      return true;
+    }
   };
 
   const computerTurn = () => {
@@ -67,15 +71,22 @@ const GameController = (humanBoard, computerBoard) => {
     } else {
       cell.classList.add("miss");
     }
-    if (human.getBoard().allShipsSunk()) {
-      let h2 = document.querySelector(".player-text");
-      h2.classList.add('win');
-      h2.textContent = "Computer Wins!!";
+
+    if (checkComputerWin()) {
       return;
     }
 
     currentPlayer = "human";
     nextTurn();
+  };
+
+  const checkComputerWin = () => {
+    if (human.getBoard().allShipsSunk()) {
+      let h2 = document.querySelector(".player-text");
+      h2.classList.add("win");
+      h2.textContent = "Computer Wins!!";
+      return true;
+    }
   };
 
   const getRandomCoordinates = () => {

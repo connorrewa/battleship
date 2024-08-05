@@ -105,7 +105,12 @@ const GameBoard = () => {
   };
 
   const allShipsSunk = () => {
-    return ships.every((shipObject) => shipObject.ship.isSunk());
+    console.log('new check')
+    return ships.every((shipObject) => {
+        console.log(shipObject.ship, shipObject.ship.isSunk())
+        return shipObject.ship.isSunk()
+  }
+);
   };
 
   const populateBoard = () => {

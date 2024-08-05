@@ -38,7 +38,6 @@ const GameController = (humanBoard, computerBoard) => {
   const humanTurn = () => {
     const computerBoardElement = document.querySelector(".computer");
     computerBoardElement.addEventListener("click", e => {
-      console.log("click");
       const x = parseInt(e.target.dataset.x);
       const y = parseInt(e.target.dataset.y);
       if (!computer.getBoard().isValidAttack(x, y)) {
@@ -50,11 +49,7 @@ const GameController = (humanBoard, computerBoard) => {
       } else {
         e.target.classList.add("miss");
       }
-      if (computer.getBoard().allShipsSunk()) {
-        let h2 = document.querySelector(".computer-text");
-        console.log(h2);
-        h2.classList.add('win');
-        h2.textContent = "Player Wins!!";
+      if (checkHumanWin()) {
         return;
       }
       currentPlayer = "computer";
@@ -62,6 +57,14 @@ const GameController = (humanBoard, computerBoard) => {
     }, {
       once: true
     });
+  };
+  const checkHumanWin = () => {
+    if (computer.getBoard().allShipsSunk()) {
+      let h2 = document.querySelector(".computer-text");
+      h2.classList.add("win");
+      h2.textContent = "Player Wins!!";
+      return true;
+    }
   };
   const computerTurn = () => {
     const {
@@ -75,14 +78,19 @@ const GameController = (humanBoard, computerBoard) => {
     } else {
       cell.classList.add("miss");
     }
-    if (human.getBoard().allShipsSunk()) {
-      let h2 = document.querySelector(".player-text");
-      h2.classList.add('win');
-      h2.textContent = "Computer Wins!!";
+    if (checkComputerWin()) {
       return;
     }
     currentPlayer = "human";
     nextTurn();
+  };
+  const checkComputerWin = () => {
+    if (human.getBoard().allShipsSunk()) {
+      let h2 = document.querySelector(".player-text");
+      h2.classList.add("win");
+      h2.textContent = "Computer Wins!!";
+      return true;
+    }
   };
   const getRandomCoordinates = () => {
     let placed = false;
@@ -221,7 +229,11 @@ const GameBoard = () => {
     }
   };
   const allShipsSunk = () => {
-    return ships.every(shipObject => shipObject.ship.isSunk());
+    console.log('new check');
+    return ships.every(shipObject => {
+      console.log(shipObject.ship, shipObject.ship.isSunk());
+      return shipObject.ship.isSunk();
+    });
   };
   const populateBoard = () => {
     const shipArray = [(0,_Ship__WEBPACK_IMPORTED_MODULE_0__["default"])(1), (0,_Ship__WEBPACK_IMPORTED_MODULE_0__["default"])(2), (0,_Ship__WEBPACK_IMPORTED_MODULE_0__["default"])(3), (0,_Ship__WEBPACK_IMPORTED_MODULE_0__["default"])(3), (0,_Ship__WEBPACK_IMPORTED_MODULE_0__["default"])(4), (0,_Ship__WEBPACK_IMPORTED_MODULE_0__["default"])(5)];
@@ -311,7 +323,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 const Ship = newLength => {
-  let length = newLength;
+  const length = newLength;
   let hitCount = 0;
   let sunk = false;
   const hit = () => {
@@ -383,6 +395,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 .cell {
   background: rgb(156, 184, 197);
   border: 1px solid black;
+  cursor: pointer;
 }
 
 
@@ -399,8 +412,16 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   background: red;
 }
 
+.hit:hover {
+  background: darkred;
+}
+
 .miss {
   background: white;
+}
+
+.miss:hover {
+  background: rgb(240, 237, 237);
 }
 
 .win {
@@ -414,7 +435,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
     gap: 20px;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,8BAA8B;EAC9B,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,eAAe;AACjB;;AAEA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,uCAAuC;EACvC,oCAAoC;EACpC,uBAAuB;AACzB;;AAEA;EACE,8BAA8B;EAC9B,uBAAuB;AACzB;;;AAGA;EACE,8BAA8B;;AAEhC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,sBAAsB;IACtB,SAAS;EACX;AACF","sourcesContent":["body {\n  background: rgb(240, 235, 235);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  gap: 10vw;\n  font-size: 20px;\n}\n\n.container {\n  padding: 40px;\n}\n.board {\n  display: grid;\n  grid-template-columns: repeat(10, 40px);\n  grid-template-rows: repeat(10, 40px);\n  border: 5px solid black;\n}\n\n.cell {\n  background: rgb(156, 184, 197);\n  border: 1px solid black;\n}\n\n\n[class=\"cell\"]:hover {\n  background: rgb(142, 170, 184);\n\n}\n\n.ship {\n  background: rgb(3, 1, 24);\n}\n\n.hit {\n  background: red;\n}\n\n.miss {\n  background: white;\n}\n\n.win {\n  color: green;\n  font-size: 30px;\n}\n\n@media only screen and (max-width: 1000px) {\n  body {\n    flex-direction: column;\n    gap: 20px;\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,8BAA8B;EAC9B,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,eAAe;AACjB;;AAEA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,uCAAuC;EACvC,oCAAoC;EACpC,uBAAuB;AACzB;;AAEA;EACE,8BAA8B;EAC9B,uBAAuB;EACvB,eAAe;AACjB;;;AAGA;EACE,8BAA8B;;AAEhC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,8BAA8B;AAChC;;AAEA;EACE,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,sBAAsB;IACtB,SAAS;EACX;AACF","sourcesContent":["body {\n  background: rgb(240, 235, 235);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  gap: 10vw;\n  font-size: 20px;\n}\n\n.container {\n  padding: 40px;\n}\n.board {\n  display: grid;\n  grid-template-columns: repeat(10, 40px);\n  grid-template-rows: repeat(10, 40px);\n  border: 5px solid black;\n}\n\n.cell {\n  background: rgb(156, 184, 197);\n  border: 1px solid black;\n  cursor: pointer;\n}\n\n\n[class=\"cell\"]:hover {\n  background: rgb(142, 170, 184);\n\n}\n\n.ship {\n  background: rgb(3, 1, 24);\n}\n\n.hit {\n  background: red;\n}\n\n.hit:hover {\n  background: darkred;\n}\n\n.miss {\n  background: white;\n}\n\n.miss:hover {\n  background: rgb(240, 237, 237);\n}\n\n.win {\n  color: green;\n  font-size: 30px;\n}\n\n@media only screen and (max-width: 1000px) {\n  body {\n    flex-direction: column;\n    gap: 20px;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

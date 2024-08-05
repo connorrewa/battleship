@@ -1,5 +1,5 @@
 const Ship = (newLength) => {
-    let length = newLength;
+    const length = newLength;
     let hitCount = 0;
     let sunk = false;
 

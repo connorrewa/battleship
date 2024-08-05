@@ -24,6 +24,7 @@ body {
 .cell {
   background: rgb(156, 184, 197);
   border: 1px solid black;
+  cursor: pointer;
 }
 
 
@@ -40,8 +41,16 @@ body {
   background: red;
 }
 
+.hit:hover {
+  background: darkred;
+}
+
 .miss {
   background: white;
+}
+
+.miss:hover {
+  background: rgb(240, 237, 237);
 }
 
 .win {
